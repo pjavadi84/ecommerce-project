@@ -3,7 +3,16 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("hi there yoohoo");
+  res.send(`
+  <div>
+    <form>
+        <input placeholder="email" />
+        <input placeholder="password" />
+        <input placeholder="password confirmation" />
+        <button>Signup</button>
+    </form>
+  </div>
+  `);
 });
 
 app.listen(3000, () => {
