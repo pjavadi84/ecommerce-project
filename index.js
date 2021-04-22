@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
   `);
 });
 
+app.post("/", (req, res) => {
+  res.send("Account created!!!!");
+});
+
 app.listen(3000, () => {
   console.log("Listening yo");
 });
