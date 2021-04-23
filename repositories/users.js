@@ -18,24 +18,22 @@ class usersRepository {
     }
   }
 
-  //   METHOD 1
+  //   READING THE CONTENT OF THE FILENAME:
   async getAll() {
-    // open the this.filename
-    const contents = await fs.promises.readFile(this.filename, {
-      encoding: "utf8",
-    });
-    // Read its content
-    console.log(contents);
-    // Parse the content
-    // Return the parsed data
+    // open and read the this.filename and return the parsed value
+    return JSON.parse(
+      await fs.promises.readFile(this.filename, {
+        encoding: "utf8",
+      })
+    );
   }
 }
 
 // Test1: test if getAll returns what is in the filename
 const test = async () => {
   const repo = new usersRepository("users.json");
-
-  await repo.getAll();
+  const users = await repo.getAll();
+  console.log(users);
 };
 
 test();
