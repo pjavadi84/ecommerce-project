@@ -27,11 +27,29 @@ class usersRepository {
       })
     );
   }
+
+  async create(attributes) {
+    //   step1: get the records in the filesystem
+    const records = await this.getAll();
+    records.push(attributes);
+    // write an updated records array back to this.filename
+    await fs.promises.writeFile(this.filename, JSON.stringify(records));
+  }
 }
 
-// Test1: test if getAll returns what is in the filename
+// TESTS:
 const test = async () => {
+  // access to users repository
   const repo = new usersRepository("users.json");
+
+  // testing create()
+  await repo.create({
+    email: "test1@gmail.com",
+    password: "password",
+    passwordConfirmation: "password",
+  });
+
+  // testing getAll() to get the records that being saved
   const users = await repo.getAll();
   console.log(users);
 };
