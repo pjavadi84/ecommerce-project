@@ -33,7 +33,16 @@ class usersRepository {
     const records = await this.getAll();
     records.push(attributes);
     // write an updated records array back to this.filename
-    await fs.promises.writeFile(this.filename, JSON.stringify(records));
+    await this.writeAll(records);
+  }
+
+  //   writeAll will JSON stringify the record. second null, 2 args are formatter
+  // to make reading the JSON file more readable
+  async writeAll(records) {
+    await fs.promises.writeFile(
+      this.filename,
+      JSON.stringify(records, null, 2)
+    );
   }
 }
 
