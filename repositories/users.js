@@ -51,6 +51,11 @@ class usersRepository {
   randomId() {
     return crypto.randomBytes(4).toString("hex");
   }
+
+  async getOne(id) {
+    const records = await this.getAll();
+    return records.find((record) => record.id === id);
+  }
 }
 
 // TESTS:
@@ -66,8 +71,8 @@ const test = async () => {
   });
 
   // testing getAll() to get the records that being saved
-  const users = await repo.getAll();
-  console.log(users);
+  const user = repo.getOne("398e888e8e");
+  console.log(user);
 };
 
 test();
