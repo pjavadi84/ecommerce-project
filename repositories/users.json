@@ -13,8 +13,9 @@
   },
   {
     "email": "amin@gmail.com",
-    "password": "password",
+    "password": "mypassword",
     "passwordConfirmation": "password",
-    "id": "39d7721d"
+    "id": "39d7721d",
+    "interests": "reading and playing guitar"
   }
 ]

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const crypto = require("crypto");
+const { report } = require("process");
 
 class usersRepository {
   constructor(filename) {
@@ -62,23 +63,35 @@ class usersRepository {
     const filteredRecords = records.filter((record) => record.id !== id);
     await this.writeAll(filteredRecords);
   }
+
+  async update(id, attrs) {
+    const records = await this.getAll();
+    const record = records.find((record) => record.id === id);
+
+    if (!record) {
+      throw new Error(`Record ID ${id} not found`);
+    }
+
+    Object.assign(record, attrs);
+    await this.writeAll(records);
+  }
 }
 
 // TESTS:
 const test = async () => {
   // access to users repository
   const repo = new usersRepository("users.json");
-
   // testing create()
-  await repo.create({
-    email: "amin@gmail.com",
-    password: "password",
-    passwordConfirmation: "password",
-  });
-
+  // await repo.create({
+  //   email: "amin@gmail.com",
+  //   password: "password",
+  //   passwordConfirmation: "password",
+  // });
   // testing getAll() to get the records that being saved
   // await repo.delete("7da418dc");
   // console.log(repo);
+
+  await repo.update("39d7721d", { interests: "reading and playing guitar" });
 };
 
 test();
