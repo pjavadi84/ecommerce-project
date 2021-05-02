@@ -3,60 +3,18 @@
     "email": "test1@gmail.com",
     "password": "password",
     "passwordConfirmation": "password",
-    "id": "496ad74f"
-  },
-  {
-    "email": "test1@gmail.com",
-    "password": "password",
-    "passwordConfirmation": "password",
     "id": "491a2032"
   },
   {
-    "email": "test1@gmail.com",
-    "password": "password",
-    "passwordConfirmation": "password",
-    "id": "6dfedf70"
-  },
-  {
     "email": "pouya@gmail.com",
-    "password": "nopass",
-    "passwordConfirmation": "nopass",
-    "id": "99642d8f"
-  },
-  {
-    "email": "test1@gmail.com",
     "password": "password",
     "passwordConfirmation": "password",
-    "id": "7da418dc"
+    "id": "c471ed08"
   },
   {
-    "email": "test1@gmail.com",
+    "email": "amin@gmail.com",
     "password": "password",
     "passwordConfirmation": "password",
-    "id": "a37688ab"
-  },
-  {
-    "email": "test1@gmail.com",
-    "password": "password",
-    "passwordConfirmation": "password",
-    "id": "2f9cb812"
-  },
-  {
-    "email": "test1@gmail.com",
-    "password": "password",
-    "passwordConfirmation": "password",
-    "id": "4fcbcf18"
-  },
-  {
-    "email": "test1@gmail.com",
-    "password": "password",
-    "passwordConfirmation": "password",
-    "id": "86365870"
-  },
-  {
-    "email": "test1@gmail.com",
-    "password": "password",
-    "passwordConfirmation": "password",
-    "id": "883dd405"
+    "id": "39d7721d"
   }
 ]

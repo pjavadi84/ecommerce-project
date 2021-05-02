@@ -56,6 +56,12 @@ class usersRepository {
     const records = await this.getAll();
     return records.find((record) => record.id === id);
   }
+
+  async delete(id) {
+    const records = await this.getAll();
+    const filteredRecords = records.filter((record) => record.id !== id);
+    await this.writeAll(filteredRecords);
+  }
 }
 
 // TESTS:
@@ -65,14 +71,14 @@ const test = async () => {
 
   // testing create()
   await repo.create({
-    email: "test1@gmail.com",
+    email: "amin@gmail.com",
     password: "password",
     passwordConfirmation: "password",
   });
 
   // testing getAll() to get the records that being saved
-  const user = repo.getOne("398e888e8e");
-  console.log(user);
+  // await repo.delete("7da418dc");
+  // console.log(repo);
 };
 
 test();
