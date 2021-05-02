@@ -2,7 +2,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 const { report } = require("process");
 
-class usersRepository {
+class UsersRepository {
   constructor(filename) {
     if (!filename) {
       throw new Error("creating a repository require a filename");
@@ -95,23 +95,4 @@ class usersRepository {
   }
 }
 
-// TESTS:
-const test = async () => {
-  // access to users repository
-  const repo = new usersRepository("users.json");
-  // testing create()
-  // await repo.create({
-  //   email: "amin@gmail.com",
-  //   password: "password",
-  //   passwordConfirmation: "password",
-  // });
-  // testing getAll() to get the records that being saved
-  // await repo.delete("7da418dc");
-  // console.log(repo);
-
-  // await repo.update("39d7721d", { interests: "reading and playing guitar" });
-  const user = await repo.getOneBy({ email: "bozghaleh@gmail.com" });
-  console.log(user);
-};
-
-test();
+module.exports = new UsersRepository("users.json");
