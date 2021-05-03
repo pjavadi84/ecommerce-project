@@ -1,10 +1,8 @@
 const fs = require("fs");
-
 const crypto = require("crypto");
 
 class UsersRepository {
   constructor(filename) {
-    debugger;
     if (!filename) {
       throw new Error("Creating a repository requires a filename");
     }
@@ -32,10 +30,11 @@ class UsersRepository {
     records.push(attrs);
 
     await this.writeAll(records);
+
+    return attrs;
   }
 
   async writeAll(records) {
-    debugger;
     await fs.promises.writeFile(
       this.filename,
       JSON.stringify(records, null, 2)
