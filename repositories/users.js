@@ -48,7 +48,7 @@ class UsersRepository {
   ) {
     // saved password: hashed.salt
     // result below is an array contains two string: first is the hash and second is the salt
-    const [hashed, salt] = savedPassInTheDatabase(".");
+    const [hashed, salt] = savedPassInTheDatabase.split(".");
 
     const hashedSuppliedPassProvidedByTheUser = await scrypt(
       suppliedPassProvidedByTheUser,
@@ -56,7 +56,7 @@ class UsersRepository {
       64
     );
 
-    return hashed === hashedSuppliedPassProvidedByTheUser;
+    return hashed === hashedSuppliedPassProvidedByTheUser.toString("hex");
   }
 
   async writeAll(records) {
