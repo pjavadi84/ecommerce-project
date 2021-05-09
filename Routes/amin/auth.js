@@ -11,15 +11,17 @@ router.get("/signup", (req, res) => {
 
 //   Route 2:
 router.post("/signup", async (req, res) => {
-  const { email, password, passwordConfirmation } = req.body;
+  const { email, passwordEntered, passwordConfirmation } = req.body;
 
-  const existingUser = await usersRepo.getOneBy({ email });
-  if (existingUser) {
+  const thisEmailExists = await usersRepo.getOneBy({ email });
+  if (thisEmailExists) {
     return res.send("Email in use");
   }
 
-  if (password !== passwordConfirmation) {
-    return res.send("Passwords must match");
+  if (passwordEntered !== passwordConfirmation) {
+    return res.send(
+      "both password entered and Password confirmation must match"
+    );
   }
 
   // CREATING USER RECORD:
