@@ -59,5 +59,17 @@
     "email": "palang@gmail.com",
     "password": "e04743381b4b03d28ee8ed6cdab05b99686a185b7e1bd910f25e9fb072f0ff76a94109b87a9459046f839e0c085155ff5578c8d50729774bb74e2d204a1c6003.ef31e7ff0af07339",
     "id": "6e6e4037"
+  },
+  {
+    "email": "forget@gmail.com",
+    "password": "b7221438b35798cdd9cbb534be37f022a37d80f897439a67702b2aaf4c46ec9a403c8a1d55b0903b9c32fbb111564ab57eefb8c5a56b15fc1d7f3f56c44902d9.f5739d242015e423",
+    "passwordConfirmation": "asdfqwer",
+    "id": "33a3f5fb"
+  },
+  {
+    "email": "parsa@gmail.com",
+    "password": "8e85122eccf2a3b9f0517b30b56e62e8322d43c194a52a4658a9c3dadba38fc926b8198dd2dee68a4b575edc5eeb71b55a83e1a514d3fc9020b8a2bb9bbcc7a9.492f48ee1eb9eaef",
+    "passwordConfirmation": "asdfqwer",
+    "id": "2fc3d8a1"
   }
 ]

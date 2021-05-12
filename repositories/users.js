@@ -1,6 +1,7 @@
 const fs = require("fs");
 const crypto = require("crypto");
 const util = require("util");
+
 const scrypt = util.promisify(crypto.scrypt);
 
 class UsersRepository {
@@ -28,35 +29,28 @@ class UsersRepository {
   async create(attrs) {
     attrs.id = this.randomId();
 
-    // step1: create salt
     const salt = crypto.randomBytes(8).toString("hex");
-
-    // create a hashed password or buffer with salt added
-    const buffer = await scrypt(attrs.password, salt, 64);
+    const buf = await scrypt(attrs.password, salt, 64);
 
     const records = await this.getAll();
-    const record = { ...attrs, password: `${buffer.toString("hex")}.${salt}` };
+    const record = {
+      ...attrs,
+      password: `${buf.toString("hex")}.${salt}`,
+    };
     records.push(record);
+
     await this.writeAll(records);
 
     return record;
   }
 
-  async comparepasswords(
-    savedPassInTheDatabase,
-    suppliedPassProvidedByTheUser
-  ) {
-    // saved password: hashed.salt
-    // result below is an array contains two string: first is the hash and second is the salt
-    const [hashed, salt] = savedPassInTheDatabase.split(".");
+  async comparePasswords(saved, supplied) {
+    // Saved -> password saved in our database. 'hashed.salt'
+    // Supplied -> password given to us by a user trying sign in
+    const [hashed, salt] = saved.split(".");
+    const hashedSuppliedBuf = await scrypt(supplied, salt, 64);
 
-    const hashedSuppliedPassProvidedByTheUser = await scrypt(
-      suppliedPassProvidedByTheUser,
-      salt,
-      64
-    );
-
-    return hashed === hashedSuppliedPassProvidedByTheUser.toString("hex");
+    return hashed === hashedSuppliedBuf.toString("hex");
   }
 
   async writeAll(records) {
@@ -103,10 +97,10 @@ class UsersRepository {
         if (record[key] !== filters[key]) {
           found = false;
         }
-      }
 
-      if (found) {
-        return record;
+        if (found) {
+          return record;
+        }
       }
     }
   }
