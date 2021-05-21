@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const authRouter = require("./Routes/amin/auth");
+const productsRouter = require("./Routes/amin/products");
 
 const app = express();
 
