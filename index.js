@@ -14,6 +14,7 @@ app.use(
     keys: ["lkasld235j"],
   })
 );
+
 app.use(authRouter);
 app.use(productsRouter);
 
