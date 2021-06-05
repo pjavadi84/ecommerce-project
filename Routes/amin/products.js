@@ -1,15 +1,15 @@
 const express = require("express");
 const multer = require("multer");
 
+const { handleErrors, requireAuth } = require("./middlewares");
 const productsRepo = require("../../repositories/products");
 const productsNewTemplate = require("../../views/admin/products/new");
 const productsIndexTemplate = require("../../views/admin/products/index");
 const productsEditTemplate = require("../../views/admin/products/edit");
 const { requireTitle, requirePrice } = require("./validators");
-const { handleErrors, requireAuth } = require("./middlewares");
 
 const router = express.Router();
-const upload = multer({ Storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get("/admin/products", requireAuth, async (req, res) => {
   const products = await productsRepo.getAll();
@@ -26,7 +26,6 @@ router.post(
   upload.single("image"),
   [requireTitle, requirePrice],
   handleErrors(productsNewTemplate),
-
   async (req, res) => {
     const image = req.file.buffer.toString("base64");
     const { title, price } = req.body;
@@ -56,18 +55,16 @@ router.post(
     const changes = req.body;
 
     if (req.file) {
-      changes.image = req.file.butter.toString("base64");
-
-      //   because if we don't find any record, we don't want the user to get the errors
-      // when he/she already actually entered a value. We use try/catch
-      try {
-        await productsRepo.update(req.params.id, changes);
-      } catch (err) {
-        return res.send("Could not find the record of this product");
-      }
-
-      res.redirect("/admin/products");
+      changes.image = req.file.buffer.toString("base64");
     }
+
+    try {
+      await productsRepo.update(req.params.id, changes);
+    } catch (err) {
+      return res.send("Could not find item");
+    }
+
+    res.redirect("/admin/products");
   }
 );
 
