@@ -58,7 +58,15 @@ router.post(
     if (req.file) {
       changes.image = req.file.butter.toString("base64");
 
-      await productsRepo.update(req.params.id, changes);
+      //   because if we don't find any record, we don't want the user to get the errors
+      // when he/she already actually entered a value. We use try/catch
+      try {
+        await productsRepo.update(req.params.id, changes);
+      } catch (err) {
+        return res.send("Could not find the record of this product");
+      }
+
+      res.redirect("/admin/products");
     }
   }
 );
