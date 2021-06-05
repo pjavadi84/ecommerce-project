@@ -52,7 +52,15 @@ router.post(
   upload.single("image"),
   [requireTitle, requirePrice],
   handleErrors(productsEditTemplate),
-  async (req, res) => {}
+  async (req, res) => {
+    const changes = req.body;
+
+    if (req.file) {
+      changes.image = req.file.butter.toString("base64");
+
+      await productsRepo.update(req.params.id, changes);
+    }
+  }
 );
 
 module.exports = router;
