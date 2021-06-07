@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const authRouter = require("./Routes/amin/auth");
-const productsRouter = require("./Routes/amin/products");
+const adminProductsRouter = require("./Routes/amin/products");
+const productsRouter = require("./routes/products.js");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(
 
 app.use(authRouter);
 app.use(productsRouter);
+app.unsubscribe(adminProductsRouter);
 
 app.listen(3000, () => {
   console.log("Listening");
