@@ -56,14 +56,15 @@ module.exports = class Repository {
     await this.writeAll(filteredRecords);
   }
 
-  async update(id, attrs) {
+  async update(cartId, attrs) {
     const records = await this.getAll();
-    const record = records.find((record) => record.id === id);
+    const record = records.find((record) => record.id === cartId);
 
     if (!record) {
       throw new Error(`Record with id ${id} not found`);
     }
 
+    // assign method copies the attribute to the the found record, for example cart
     Object.assign(record, attrs);
     await this.writeAll(records);
   }

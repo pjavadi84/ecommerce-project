@@ -38,7 +38,7 @@ router.post("/cart/products", async (req, res) => {
     items: cart.items,
   });
 
-  res.send("Product added to cart");
+  res.redirect("/cart");
 });
 
 // B) Receive a GET request to show all items in a cart
@@ -62,7 +62,19 @@ router.get("/cart", async (req, res) => {
 
 //C) Receive a POST request to delete an item from a cart
 router.post("/cart/products/delete", async (req, res) => {
-  console.log(req.body.itemId);
+  //  ID of an item coming from the value of the delete button in show.js
+  const { itemId } = req.body;
+  // the cart we are interested to manipulate. in this case, deleting an item
+  const cart = await cartsRepo.getOne(req.session.cartId);
+
+  // return the non-deleted items:
+  // if the itemID coming from the user does not equal to the item ID coming from the designated cart
+  const items = cart.items.filter((item) => item.id !== itemId);
+
+  // update the cart repository and pass the cart ID and non-deleted items into update function
+  await cartsRepo.update(req.session.cartId, { items });
+
+  res.redirect("/cart");
 });
 
 module.exports = router;
