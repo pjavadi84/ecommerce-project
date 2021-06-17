@@ -24,5 +24,5 @@ app.use(cartsRouter);
 app.unsubscribe(adminProductsRouter);
 
 app.listen(port, () => {
-  console.log("listening on *:5000");
+  console.log("listening");
 });
