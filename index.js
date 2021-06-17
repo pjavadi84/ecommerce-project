@@ -6,8 +6,9 @@ const adminProductsRouter = require("./Routes/amin/products");
 const productsRouter = require("./routes/products.js");
 const cartsRouter = require("./routes/carts.js");
 
+const PORT = process.env.PORT || "8080";
 const app = express();
-const port = process.env.PORT || 5000;
+app.set("port", PORT);
 
 app.use(express.static("public"));
 
